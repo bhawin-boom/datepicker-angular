@@ -1,27 +1,44 @@
-# ComponentLibrary
+## Datepicker Angular
+A simple Datepicker plugin which is used for showing datepicker .
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+## Installation
+`npm i bp-datepicker`
 
-## Development server
+## Usage
+`<input type="text" bpDatePicker />`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+    Min date
+The minDate feature disables the selection of any date previous to the date provided by user as input
+`<input type="text" bpDatePicker [minDate]="javascript date object" />`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    Max date 
+The maxDate feature disables the selection of any date ahead to the date provided by user as input
+`<input type="text" bpDatePicker [maxDate]="javascript date object" />`
+
+    Disable Weekends
+The disable weekends feature disables the selection of any saturday and sunday in the given date range(min and max dates) .
+`<input type="text" bpDatePicker [disableWeekends]="true/false" />`
+
+
+    Disable particular dates 
+The disable particular dates feature disables the selection of of the dates given by user as input .
+`<input type="text" bpDatePicker [disabledDates]="array of javascript date object" />`
+
+    Close Datepicker 
+The close datepicker feature is used to hide and show the datepicker .
+`<input type="text" bpDatePicker [closed]="true/false" />` 
+
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This plugin is both Jit and Aot compatible . You can make the build using `ng build` and `ng build --prod --aot` . It will work for both . 
 
-## Running unit tests
+## Code
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[codebase](https://github.com/bhawin-boom/datepicker-angular)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Further Help
+Name: Bhawin Parkeria 
+Email : bhawin.parkeria@gmail.com
