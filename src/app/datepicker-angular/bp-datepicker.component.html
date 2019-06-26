@@ -49,26 +49,30 @@
     </div>
   </div>
   <div class="bp-datepicker-body" [hidden]="currentViewType != viewTypes.dateView">
-    <table class="dateView">
-      <tr class="bp-heading">
-        <td>Sun</td>
-        <td>Mon</td>
-        <td>Tue</td>
-        <td>Wed</td>
-        <td>Thu</td>
-        <td>Fri</td>
-        <td>Sat</td>
-      </tr>
-      <tr *ngFor="let weekNumber of weekArray; let i = index">
-        <td *ngFor="let weekDay of dateArray[i]">
+    <div class="dateView">
+      <div class="bp-heading">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+      <div *ngFor="let weekNumber of weekArray; let i = index" class="rows">
+        <div *ngFor="let weekDay of dateArray[i];let j = index">
           <span *ngIf="weekDay?.dateNumber"
             [ngClass]="{ 'bp-disabled-date' : weekDay.disabled , 'bp-enabled-date' : !weekDay.disabled , 'selected': weekDay.selected }"
+            [class.rangeSelectedMid]="weekDay.rangeSelectedMid"
+            [class.rangeSelectedStart]="weekDay.rangeSelectedStart"
+            [class.rangeSelectedEnd]="weekDay.rangeSelectedEnd"
+            [class.onlyFirstDate]="weekDay.onlyFromDate"
             (click)="!weekDay.disabled && setSelection(weekDay)">
             <span>{{ weekDay.dateNumber }}</span>
           </span>
-        </td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="bp-datepicker-body" [hidden]="currentViewType != viewTypes.monthView">
     <div class="monthView">

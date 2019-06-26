@@ -31,6 +31,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
    @Output() dateEmitter = new EventEmitter();
    @Output() closedEmitter = new EventEmitter();
    @Input() selectedDate;
+   @Input() dateRange;
    clickEventListener: any;
    component: any;
    domele: any;
@@ -69,7 +70,8 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          maxDate: this.maxDate,
          disabledDates: this.disabledDates,
          disableWeekends: this.disableWeekends,
-         selectedDate: this.selectedDate
+         selectedDate: this.selectedDate,
+         dateRange: this.dateRange
       };
       this.datePickerService.setProperties(data);
       if (this.closed) {
@@ -110,13 +112,15 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
    }
 
    checkClick(targetElement) {
-      const eleToPlace = this.document.getElementById('bp-datepicker-wrapper');
-      if (eleToPlace) {
-         const clickedInside = eleToPlace.contains(targetElement);
-         const clickedInsideRef = this.elementRef.nativeElement.contains(targetElement);
-         if (!clickedInside && !clickedInsideRef) {
-            this.close();
-            this.closedEmitter.emit(true);
+      if (!this.dateRange) {
+         const eleToPlace = this.document.getElementById('bp-datepicker-wrapper');
+         if (eleToPlace) {
+            const clickedInside = eleToPlace.contains(targetElement);
+            const clickedInsideRef = this.elementRef.nativeElement.contains(targetElement);
+            if (!clickedInside && !clickedInsideRef) {
+               this.close();
+               this.closedEmitter.emit(true);
+            }
          }
       }
    }

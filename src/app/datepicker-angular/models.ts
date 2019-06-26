@@ -4,4 +4,5 @@ export interface IDatePickerProperties {
     disabledDates?: any;
     selectedDate?: Date;
     disableWeekends?: boolean;
+    dateRange?: boolean;
 }

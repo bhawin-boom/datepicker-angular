@@ -1,5 +1,6 @@
 /*
 developer : Bhawin Parkeria
+email: bhawin.parkeria@gmail.com
 */
 
 import { Input, OnInit, Component, EventEmitter, OnDestroy } from '@angular/core';
@@ -11,7 +12,7 @@ import { DatePickerService } from './datepicker.service';
   templateUrl: './bp-datepicker.component.html',
   styleUrls: ['./bp-datepicker.component.scss']
 })
-export class BpDatePickerComponent implements OnInit , OnDestroy {
+export class BpDatePickerComponent implements OnInit, OnDestroy {
   minDate: Date;
   maxDate: Date;
   disabledDates: any;
@@ -35,8 +36,11 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   weekCount: number;
   weekArray: Array<any>;
   propertiesSubscriber: any;
+  dateRange: boolean;
+  fromDate: any;
+  toDate: any;
 
-  constructor( private datePickerService: DatePickerService) { }
+  constructor(private datePickerService: DatePickerService) { }
 
   ngOnInit() {
     // if you reached here and seen this code and understood in 1 day . Then i must say that you are the goat .
@@ -46,6 +50,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
       this.disableWeekends = properties.disableWeekends;
       this.disabledDates = properties.disabledDates;
       this.selectedDate = properties.selectedDate;
+      this.dateRange = properties.dateRange;
       this.getCalenderInfo();
     });
     const data = this.datePickerService.getDefaultProperties();
@@ -54,6 +59,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     this.disabledDates = data.disabledDates;
     this.disableWeekends = data.disableWeekends;
     this.selectedDate = data.selectedDate;
+    this.dateRange = data.dateRange;
     this.getCalenderInfo();
   }
 
@@ -79,7 +85,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
       this.publishDateCalender();
     } else if (this.currentViewType === this.viewTypes.monthView) {
       this.publishMonthCalender();
-    }else {
+    } else {
       this.publishYearCalender();
     }
   }
@@ -89,12 +95,12 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     const rem = (year - 1971) % 16;
     const div = Math.floor((year - 1971) / 16);
     const startPoint = 1971 + (div * 16);
-    if(startPoint === 1971) {
+    if (startPoint === 1971) {
       return false;
     }
     this.yearArray = [];
-    for ( let i = startPoint ; i < startPoint + 16 ; ++i) {
-      this.yearArray.push({'name': i , 'disabled' : this.checkifYearDisabled(i)});
+    for (let i = startPoint; i < startPoint + 16; ++i) {
+      this.yearArray.push({ 'name': i, 'disabled': this.checkifYearDisabled(i) });
     }
   }
 
@@ -111,29 +117,29 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   publishMonthCalender() {
     this.year = this.currentDate.getFullYear();
     this.monthsData = [];
-    this.monthsData.push({ 'value': 0 , 'name' : this.months[0] , 'disabled' : this.isMonthDisabled(0) });
-    this.monthsData.push({ 'value': 1 , 'name' : this.months[1] , 'disabled' : this.isMonthDisabled(1) });
-    this.monthsData.push({ 'value': 2 , 'name' : this.months[2] , 'disabled' : this.isMonthDisabled(2) });
-    this.monthsData.push({ 'value': 3 , 'name' : this.months[3] , 'disabled' : this.isMonthDisabled(3) });
-    this.monthsData.push({ 'value': 4 , 'name' : this.months[4] , 'disabled' : this.isMonthDisabled(4) });
-    this.monthsData.push({ 'value': 5 , 'name' : this.months[5] , 'disabled' : this.isMonthDisabled(5) });
-    this.monthsData.push({ 'value': 6 , 'name' : this.months[6] , 'disabled' : this.isMonthDisabled(6) });
-    this.monthsData.push({ 'value': 7 , 'name' : this.months[7] , 'disabled' : this.isMonthDisabled(7) });
-    this.monthsData.push({ 'value': 8 , 'name' : this.months[8] , 'disabled' : this.isMonthDisabled(8) });
-    this.monthsData.push({ 'value': 9 , 'name' : this.months[9] , 'disabled' : this.isMonthDisabled(9) });
-    this.monthsData.push({ 'value': 10 , 'name' : this.months[10] , 'disabled' : this.isMonthDisabled(10) });
-    this.monthsData.push({ 'value': 11 , 'name' : this.months[11] , 'disabled' : this.isMonthDisabled(11) });
+    this.monthsData.push({ 'value': 0, 'name': this.months[0], 'disabled': this.isMonthDisabled(0) });
+    this.monthsData.push({ 'value': 1, 'name': this.months[1], 'disabled': this.isMonthDisabled(1) });
+    this.monthsData.push({ 'value': 2, 'name': this.months[2], 'disabled': this.isMonthDisabled(2) });
+    this.monthsData.push({ 'value': 3, 'name': this.months[3], 'disabled': this.isMonthDisabled(3) });
+    this.monthsData.push({ 'value': 4, 'name': this.months[4], 'disabled': this.isMonthDisabled(4) });
+    this.monthsData.push({ 'value': 5, 'name': this.months[5], 'disabled': this.isMonthDisabled(5) });
+    this.monthsData.push({ 'value': 6, 'name': this.months[6], 'disabled': this.isMonthDisabled(6) });
+    this.monthsData.push({ 'value': 7, 'name': this.months[7], 'disabled': this.isMonthDisabled(7) });
+    this.monthsData.push({ 'value': 8, 'name': this.months[8], 'disabled': this.isMonthDisabled(8) });
+    this.monthsData.push({ 'value': 9, 'name': this.months[9], 'disabled': this.isMonthDisabled(9) });
+    this.monthsData.push({ 'value': 10, 'name': this.months[10], 'disabled': this.isMonthDisabled(10) });
+    this.monthsData.push({ 'value': 11, 'name': this.months[11], 'disabled': this.isMonthDisabled(11) });
   }
 
   isMonthDisabled(month) {
-    const date = new Date(this.year , month);
+    const date = new Date(this.year, month);
     if (!this.minDate && !this.maxDate) {
       return false;
     }
     if (!this.minDate && this.maxDate) {
-      if ( date <= this.maxDate ) {
+      if (date <= this.maxDate) {
         return false;
-      }else {
+      } else {
         return true;
       }
     }
@@ -143,7 +149,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
       minDate.setHours(0, 0, 0, 0);
       if (date >= this.minDate) {
         return false;
-      }else {
+      } else {
         return true;
       }
     }
@@ -151,10 +157,10 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     if (this.minDate && this.maxDate) {
       const minDate = new Date(this.minDate);
       minDate.setDate(1);
-      minDate.setHours(0 , 0 , 0 , 0);
+      minDate.setHours(0, 0, 0, 0);
       if (date >= minDate && date <= this.maxDate) {
         return false;
-      }else {
+      } else {
         return true;
       }
     }
@@ -172,9 +178,8 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     this.dateArray.length = 0;
     let offset = this.firstDay.getDay();
     let count = 1;
-    // uss haath ko tum tham lo , wo meherbaan kl ho na ho
     this.weekCount = this.weeksinMonth();
-    this.weekArray = new Array(this.weekCount) ;
+    this.weekArray = new Array(this.weekCount);
     for (let i = 0; i < this.weekCount; ++i) {
       this.dateArray[i] = [];
       for (let j = 0; j < 7; ++j) {
@@ -182,13 +187,13 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
           const date = new Date(this.firstDay.getTime());
           date.setDate(date.getDate() + (count - 1));
           // tslint:disable-next-line:max-line-length
-          this.dateArray[i].push({ 'dateNumber' : date.getDate() , 'date' : date , 'disabled': ((this.minDate && this.compareMinDate(date)) || (this.maxDate && this.compareMaxDate(date)) || this.isDateDisabled(date)) , 'selected': this.getSelected(date) , 'description': this.getDescription(date) });
+          this.dateArray[i].push({ 'dateNumber': date.getDate(), 'date': date, 'disabled': ((this.minDate && this.compareMinDate(date)) || (this.maxDate && this.compareMaxDate(date)) || this.isDateDisabled(date)), 'selected': this.getSelected(date), 'description': this.getDescription(date), 'rangeSelectedMid': this.getRangeSelectedMid(date), 'rangeSelectedStart': this.getRangeSelectedStart(date), 'rangeSelectedEnd': this.getRangeSelectedEnd(date), 'onlyFromDate': this.onlyFromDate() });
 
-          if ( count === this.lastDay.getDate()) {
+          if (count === this.lastDay.getDate()) {
             break;
           }
           ++count;
-        }else {
+        } else {
           this.dateArray[i].push(null);
           --offset;
         }
@@ -196,13 +201,73 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     }
   }
 
+  getRangeSelectedMid(date) {
+    if (!this.fromDate) {
+      return false;
+    } else {
+      const fromDate = this.fromDate;
+      // tslint:disable-next-line:max-line-length
+      // if (this.fromDate.getDate() === date.getDate() && this.fromDate.getFullYear() === date.getFullYear() && this.fromDate.getMonth() === date.getMonth()) {
+      //   return true;
+      // }
+      if (this.toDate) {
+        // tslint:disable-next-line:max-line-length
+        // if (this.toDate.getDate() === date.getDate() && this.toDate.getFullYear() === date.getFullYear() && this.toDate.getMonth() === date.getMonth()) {
+        //   return true;
+        // }
+        if (date > this.fromDate && date < this.toDate) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  }
+
+  getRangeSelectedStart(date) {
+    if (!this.fromDate) {
+      return false;
+    } else {
+      const fromDate = this.fromDate;
+      // tslint:disable-next-line:max-line-length
+      if (this.fromDate.getDate() === date.getDate() && this.fromDate.getFullYear() === date.getFullYear() && this.fromDate.getMonth() === date.getMonth()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  getRangeSelectedEnd(date) {
+    if (this.toDate) {
+      // tslint:disable-next-line:max-line-length
+      if (this.toDate.getDate() === date.getDate() && this.toDate.getFullYear() === date.getFullYear() && this.toDate.getMonth() === date.getMonth()) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  onlyFromDate(){
+    if(this.fromDate && !this.toDate) {
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   compareMinDate(date) {
     if (date.getFullYear() < this.minDate.getFullYear()) {
       return true;
-    }else if ( date.getFullYear() === this.minDate.getFullYear() && date.getMonth() < this.minDate.getMonth() ) {
+    } else if (date.getFullYear() === this.minDate.getFullYear() && date.getMonth() < this.minDate.getMonth()) {
       return true;
-    // tslint:disable-next-line:max-line-length
-    }else if (date.getFullYear() === this.minDate.getFullYear() && date.getMonth() === this.minDate.getMonth() && date.getDate() < this.minDate.getDate()) {
+      // tslint:disable-next-line:max-line-length
+    } else if (date.getFullYear() === this.minDate.getFullYear() && date.getMonth() === this.minDate.getMonth() && date.getDate() < this.minDate.getDate()) {
       return true;
     }
     return false;
@@ -211,24 +276,24 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   compareMaxDate(date) {
     if (date.getFullYear() > this.maxDate.getFullYear()) {
       return true;
-    }else if (date.getFullYear() === this.maxDate.getFullYear() && date.getMonth() > this.maxDate.getMonth() ) {
+    } else if (date.getFullYear() === this.maxDate.getFullYear() && date.getMonth() > this.maxDate.getMonth()) {
       return true;
-    // tslint:disable-next-line:max-line-length
-    }else if (date.getFullYear() === this.maxDate.getFullYear() && date.getMonth() === this.maxDate.getMonth() && date.getDate() > this.maxDate.getDate()) {
+      // tslint:disable-next-line:max-line-length
+    } else if (date.getFullYear() === this.maxDate.getFullYear() && date.getMonth() === this.maxDate.getMonth() && date.getDate() > this.maxDate.getDate()) {
       return true;
     }
     return false;
   }
 
   getDescription(date) {
-    if ( this.disabledDates) {
+    if (this.disabledDates) {
       const data = this.disabledDates.find(dateData => {
         return (dateData.date.getFullYear() === date.getFullYear() &&
-                dateData.date.getMonth() === date.getMonth() &&
-                dateData.date.getDate() === date.getDate());
+          dateData.date.getMonth() === date.getMonth() &&
+          dateData.date.getDate() === date.getDate());
       });
       return data && data.description ? data.description : '';
-    }else {
+    } else {
       return '';
     }
   }
@@ -237,14 +302,14 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     if (this.disableWeekends && (date.getDay() === 6 || date.getDay() === 0)) {
       return true;
     }
-    if ( this.disabledDates) {
+    if (this.disabledDates) {
       const data = this.disabledDates.find(dateData => {
         return (dateData.date.getFullYear() === date.getFullYear() &&
-                dateData.date.getMonth() === date.getMonth() &&
-                dateData.date.getDate() === date.getDate());
+          dateData.date.getMonth() === date.getMonth() &&
+          dateData.date.getDate() === date.getDate());
       });
       return data ? true : false;
-    }else {
+    } else {
       return false;
     }
   }
@@ -276,20 +341,20 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     if (this.currentViewType === this.viewTypes.monthView) {
       this.getNextYear();
     }
-    if (this.currentViewType === this.viewTypes.yearView){
+    if (this.currentViewType === this.viewTypes.yearView) {
       this.getNextYears();
     }
   }
 
   getNextYears() {
-    if (this.maxDate && this.currentDate.getFullYear() >= this.maxDate.getFullYear()){
+    if (this.maxDate && this.currentDate.getFullYear() >= this.maxDate.getFullYear()) {
       return false;
-    }else {
+    } else {
       const date = new Date(this.currentDate);
       date.setFullYear(date.getFullYear() + 16);
       const newDate = new Date();
       newDate.setFullYear(newDate.getFullYear() + 16);
-      if ( date.getFullYear() > newDate.getFullYear()) {
+      if (date.getFullYear() > newDate.getFullYear()) {
         return false;
       }
     }
@@ -307,7 +372,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   }
 
   getNextYear() {
-    if (this.maxDate && this.currentDate.getFullYear() >= this.maxDate.getFullYear()){
+    if (this.maxDate && this.currentDate.getFullYear() >= this.maxDate.getFullYear()) {
       return false;
     }
     this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
@@ -318,10 +383,10 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     if (this.currentViewType === this.viewTypes.dateView) {
       this.getPrevMonth();
     }
-    if ( this.currentViewType === this.viewTypes.monthView) {
+    if (this.currentViewType === this.viewTypes.monthView) {
       this.getprevYear();
     }
-    if ( this.currentViewType === this.viewTypes.yearView) {
+    if (this.currentViewType === this.viewTypes.yearView) {
       this.getprevYears();
     }
   }
@@ -329,12 +394,12 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   getprevYears() {
     if (this.minDate && this.currentDate.getFullYear() <= this.minDate.getFullYear()) {
       return false;
-    }else {
+    } else {
       const date = new Date(this.currentDate);
       date.setFullYear(date.getFullYear() - 16);
       const newDate = new Date();
       newDate.setFullYear(newDate.getFullYear() - 16);
-      if ( date.getFullYear() < newDate.getFullYear()) {
+      if (date.getFullYear() < newDate.getFullYear()) {
         return false;
       }
     }
@@ -346,7 +411,7 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
     if (this.minDate && this.currentDate.getFullYear() <= this.minDate.getFullYear()) {
       return false;
     }
-    this.currentDate.setFullYear(this.currentDate.getFullYear() - 1 );
+    this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
     this.paint();
   }
 
@@ -360,13 +425,42 @@ export class BpDatePickerComponent implements OnInit , OnDestroy {
   }
 
   setSelection(day) {
-    this.selectedDate = day.date;
-    this.emitSelectedDate();
+    if (this.dateRange) {
+      if (!this.fromDate) {
+        this.fromDate = day.date;
+      } else if (this.fromDate && !this.toDate) {
+        // tslint:disable-next-line:max-line-length
+        if (this.fromDate.getMonth() === day.date.getMonth() && this.fromDate.getFullYear() === day.date.getFullYear() && this.fromDate.getDate() === day.date.getDate() ) {
+          this.toDate = day.date;
+          this.paint();
+          return true;
+        } else if (day.date < this.fromDate) {
+          const dateData = new Date(day.date);
+          this.fromDate = dateData;
+        } else {
+          this.toDate = day.date;
+        }
+      } else if (this.fromDate && this.toDate) {
+        this.fromDate = null;
+        this.toDate = null;
+        this.setSelection(day);
+      }
+    } else {
+      this.selectedDate = day.date;
+    }
     this.paint();
+    this.emitSelectedDate();
   }
 
   emitSelectedDate() {
-    this.datePickerService.setDateEmitter(this.selectedDate);
+    if (this.dateRange) {
+      let data = [];
+      data.push(this.fromDate);
+      data.push(this.toDate);
+      this.datePickerService.setDateEmitter(data);
+    } else {
+      this.datePickerService.setDateEmitter(this.selectedDate);
+    }
   }
 
   getMonthView() {
