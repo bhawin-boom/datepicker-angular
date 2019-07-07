@@ -49,6 +49,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
 
    ngAfterViewInit() {
       this.datePickerService.getdateEmitter().subscribe(value => {
+         console.log(value);
          this.dateEmitter.emit(value);
       });
       this.getData();
@@ -92,6 +93,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          .create(this.injector);
 
       this.componentRef = componentRef;
+      this.componentRef.changeDetectorRef.detectChanges();
 
       // 2. Attach component to the appRef so that it's inside the ng component tree
       this.appRef.attachView(componentRef.hostView);
@@ -104,7 +106,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
       document.body.appendChild(this.domele);
       setTimeout(() => {
          this.setElemPosition();
-         this.document.addEventListener('click' , (event) => {
+         const eventListerer = this.document.addEventListener('click' , (event) => {
             this.checkClick(event.target);
          });
       }, 1);
@@ -112,12 +114,27 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
    }
 
    checkClick(targetElement) {
+      if (targetElement === this.elementRef.nativeElement) {
+         return false;
+      }
       if (!this.dateRange) {
          const eleToPlace = this.document.getElementById('bp-datepicker-wrapper');
          if (eleToPlace) {
-            const clickedInside = eleToPlace.contains(targetElement);
-            const clickedInsideRef = this.elementRef.nativeElement.contains(targetElement);
+            const clickedInside = eleToPlace.contains(targetElement.parentNode);
+            const clickedInsideRef = this.elementRef.nativeElement.contains(targetElement.parentNode);
             if (!clickedInside && !clickedInsideRef) {
+               this.close();
+               this.closedEmitter.emit(true);
+            }
+         }
+      } else {
+         const eleToPlace = this.document.getElementById('bp-datepicker-wrapper');
+         if (eleToPlace) {
+            const clickedInside = eleToPlace.contains(targetElement.parentNode);
+            if (!clickedInside) {
+               if (targetElement.classList.contains('dateData')) {
+                  return false;
+               }
                this.close();
                this.closedEmitter.emit(true);
             }
@@ -127,8 +144,9 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
 
    setElemPosition() {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
+      console.log(rect);
       this.domele.style.position = 'absolute';
-      this.domele.style.top = (rect.height + rect.top) + 'px';
+      this.domele.style.top = (rect.height + rect.top) + window.scrollY + 'px';
       this.domele.style.left = rect.left + 'px';
       this.domele.style.width = Math.floor(rect.width) + 'px';
       this.domele.style.zIndex = '9999999999';

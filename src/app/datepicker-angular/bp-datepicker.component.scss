@@ -21,7 +21,7 @@
   span.headerButton {
     padding: 5px;
     border-radius: 5px;
-    color: #666666;
+    color: #bbb;
     cursor: pointer;
   }
 
@@ -69,7 +69,7 @@
 
 .bp-datepicker-body {
    .dateView{
-      margin-top: 10px;
+      margin-top: 15px;
       text-align: center;
       font-size: 14px;
       div.bp-heading {
@@ -93,17 +93,17 @@
             align-content: space-around;
             float: left;
             span.bp-enabled-date {
-               color: #666666;
+               color: #bbbbbb;
                cursor: pointer;
              }
          
              span.bp-disabled-date {
-               color: #bbbbbb;
+               color: #666666;
              }
          
              span {
                display: block;
-               line-height: 55px;
+               line-height: 57px;
                :last-of-type{
                   &.rangeSelectedMid{
                      border-top-right-radius: 50%;
@@ -159,18 +159,18 @@
       text-align: center;
 
       div {
-        line-height: 55px;
+        line-height: 57px;
         padding: 7px;
         border-radius: 5px;
         vertical-align: middle;
       }
 
       div.bp-disabled-month {
-        color: #bbbbbb;
+        color: #666666;
       }
 
       div.bp-enabled-month {
-        color: #666666;
+        color: #bbb;
         cursor: pointer;
       }
     }
@@ -186,18 +186,18 @@
       text-align: center;
 
       div {
-        line-height: 55px;
+        line-height: 57px;
         padding: 7px;
         border-radius: 5px;
         vertical-align: middle;
       }
 
       div.bp-disabled-year {
-        color: #bbbbbb;
+        color: #666666;
       }
 
       div.bp-enabled-year {
-        color: #666666;
+        color: #bbb;
         cursor: pointer;
       }
     }

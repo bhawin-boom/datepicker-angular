@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   minDate: any;
   maxDate: any;
   disabledDates: any;
+  isClosed = true;
 
   constructor() {
 
@@ -21,5 +22,13 @@ export class AppComponent implements OnInit {
     this.minDate = new Date(this.minDate.setMonth(this.minDate.getMonth() - 3));
     this.maxDate = new Date();
     this.maxDate = new Date(this.maxDate.setMonth(this.maxDate.getMonth() + 3));
+  }
+
+  toggleClosed() {
+    this.isClosed = !this.isClosed;
+  }
+
+  closeCalled(data) {
+    this.isClosed = true;
   }
 }

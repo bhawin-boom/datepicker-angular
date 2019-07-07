@@ -3,14 +3,15 @@ developer : Bhawin Parkeria
 email: bhawin.parkeria@gmail.com
 */
 
-import { Input, OnInit, Component, EventEmitter, OnDestroy } from '@angular/core';
+import { Input, OnInit, Component, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { BpDatePickerConstants } from './bp-datepicker.constants';
 import { DatePickerService } from './datepicker.service';
 
 @Component({
   selector: 'app-bp-datepicker',
   templateUrl: './bp-datepicker.component.html',
-  styleUrls: ['./bp-datepicker.component.scss']
+  styleUrls: ['./bp-datepicker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BpDatePickerComponent implements OnInit, OnDestroy {
   minDate: Date;

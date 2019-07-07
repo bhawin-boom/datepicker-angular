@@ -60,7 +60,7 @@
         <div>Sat</div>
       </div>
       <div *ngFor="let weekNumber of weekArray; let i = index" class="rows">
-        <div *ngFor="let weekDay of dateArray[i];let j = index">
+        <div *ngFor="let weekDay of dateArray[i];let j = index" class="cell">
           <span *ngIf="weekDay?.dateNumber"
             [ngClass]="{ 'bp-disabled-date' : weekDay.disabled , 'bp-enabled-date' : !weekDay.disabled , 'selected': weekDay.selected }"
             [class.rangeSelectedMid]="weekDay.rangeSelectedMid"
@@ -68,7 +68,7 @@
             [class.rangeSelectedEnd]="weekDay.rangeSelectedEnd"
             [class.onlyFirstDate]="weekDay.onlyFromDate"
             (click)="!weekDay.disabled && setSelection(weekDay)">
-            <span>{{ weekDay.dateNumber }}</span>
+            <span class="dateData">{{ weekDay.dateNumber }}</span>
           </span>
         </div>
       </div>
