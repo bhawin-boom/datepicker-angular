@@ -58,16 +58,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
 
    @HostListener('window:resize', [])
    onWindowResize() {
-      if(this.componentRef) {
-         this.setElemPosition();
-      }
-   }
-
-   @HostListener('window:scroll', [])
-   onWindowScroll() {
-      if(this.componentRef) {
-         this.setElemPosition();
-      }
+      this.setElemPosition();
    }
 
    ngOnChanges(changes: SimpleChanges) {
@@ -118,7 +109,6 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          const eventListerer = this.document.addEventListener('click' , (event) => {
             this.checkClick(event.target);
          });
-         window.addEventListener('scroll', this.scroll , true);
       }, 1);
 
    }
@@ -152,17 +142,10 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
       }
    }
 
-
-   scroll = (): void => {
-      console.log('here i am ');
-      this.setElemPosition();
-   }
-
    setElemPosition() {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      console.log(rect);
       this.domele.style.position = 'absolute';
-      this.domele.style.top = (rect.height + rect.top) + window.scrollY + 'px';
+      this.domele.style.top = (rect.height + rect.top) + 'px';
       this.domele.style.left = rect.left + 'px';
       this.domele.style.width = Math.floor(rect.width) + 'px';
       this.domele.style.zIndex = '9999999999';
@@ -174,7 +157,6 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          this.componentRef.destroy();
          this.document.removeEventListener('click' , () => {
          });
-         window.removeEventListener('scroll', this.scroll , true);
       }
    }
 
