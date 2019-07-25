@@ -52,6 +52,8 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
       this.disabledDates = properties.disabledDates;
       this.selectedDate = properties.selectedDate;
       this.dateRange = properties.dateRange;
+      this.fromDate = properties.fromDate;
+      this.toDate = properties.toDate;
       this.getCalenderInfo();
     });
     const data = this.datePickerService.getDefaultProperties();
@@ -61,6 +63,8 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     this.disableWeekends = data.disableWeekends;
     this.selectedDate = data.selectedDate;
     this.dateRange = data.dateRange;
+    this.fromDate = data.fromDate;
+    this.toDate = data.toDate;
     this.getCalenderInfo();
   }
 
@@ -74,6 +78,9 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     this.currentDate = new Date();
     if (this.selectedDate) {
       this.currentDate = new Date(this.selectedDate);
+    }
+    if(this.dateRange && this.fromDate){
+      this.currentDate = new Date(this.fromDate);
     }
     if (!this.currentViewType) {
       this.currentViewType = this.viewTypes.dateView;

@@ -32,6 +32,8 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
    @Output() closedEmitter = new EventEmitter();
    @Input() selectedDate;
    @Input() dateRange;
+   @Input() fromDate;
+   @Input() toDate;
    clickEventListener: any;
    component: any;
    domele: any;
@@ -81,7 +83,9 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          disabledDates: this.disabledDates,
          disableWeekends: this.disableWeekends,
          selectedDate: this.selectedDate,
-         dateRange: this.dateRange
+         dateRange: this.dateRange,
+         fromDate: this.fromDate,
+         toDate: this.toDate
       };
       this.datePickerService.setProperties(data);
       if (this.closed) {
