@@ -82,6 +82,9 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     if (this.selectedDate) {
       this.currentDate = new Date(this.selectedDate);
     }
+    if(this.dateRange && this.fromDate){
+      this.currentDate = new Date(this.fromDate);
+    }
     if (!this.currentViewType) {
       this.currentViewType = this.viewTypes.dateView;
     }
