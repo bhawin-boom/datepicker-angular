@@ -26,7 +26,7 @@
 <div class="database">database</div>
 
 <input type="text" bpDatePicker style="width: 400px;" [minDate]="minDate" [maxDate]="maxDate" [closed]="isClosed" (click)="toggleClosed()" (closedEmitter)="closeCalled
-($event)" />
+($event)" [disabledDates]="disabledDates" [dateRange]="true" [fromDate]="fromDate" [isFromDateConstant]="true" />
 
 <div class="database">database</div>
 <div class="database">database</div>

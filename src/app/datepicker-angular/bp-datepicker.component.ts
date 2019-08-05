@@ -40,6 +40,7 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
   dateRange: boolean;
   fromDate: any;
   toDate: any;
+  isFromDateConstant: boolean;
 
   constructor(private datePickerService: DatePickerService) { }
 
@@ -52,6 +53,9 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
       this.disabledDates = properties.disabledDates;
       this.selectedDate = properties.selectedDate;
       this.dateRange = properties.dateRange;
+      this.fromDate = properties.fromDate;
+      this.toDate = properties.toDate;
+      this.isFromDateConstant = properties.isFromDateConstant;
       this.getCalenderInfo();
     });
     const data = this.datePickerService.getDefaultProperties();
@@ -61,6 +65,9 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     this.disableWeekends = data.disableWeekends;
     this.selectedDate = data.selectedDate;
     this.dateRange = data.dateRange;
+    this.fromDate = data.fromDate;
+    this.toDate = data.toDate;
+    this.isFromDateConstant = data.isFromDateConstant;
     this.getCalenderInfo();
   }
 
@@ -101,7 +108,7 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     }
     this.yearArray = [];
     for (let i = startPoint; i < startPoint + 16; ++i) {
-      this.yearArray.push({ 'name': i, 'disabled': this.checkifYearDisabled(i) });
+      this.yearArray.push({ name: i, disabled: this.checkifYearDisabled(i) });
     }
   }
 
@@ -118,18 +125,18 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
   publishMonthCalender() {
     this.year = this.currentDate.getFullYear();
     this.monthsData = [];
-    this.monthsData.push({ 'value': 0, 'name': this.months[0], 'disabled': this.isMonthDisabled(0) });
-    this.monthsData.push({ 'value': 1, 'name': this.months[1], 'disabled': this.isMonthDisabled(1) });
-    this.monthsData.push({ 'value': 2, 'name': this.months[2], 'disabled': this.isMonthDisabled(2) });
-    this.monthsData.push({ 'value': 3, 'name': this.months[3], 'disabled': this.isMonthDisabled(3) });
-    this.monthsData.push({ 'value': 4, 'name': this.months[4], 'disabled': this.isMonthDisabled(4) });
-    this.monthsData.push({ 'value': 5, 'name': this.months[5], 'disabled': this.isMonthDisabled(5) });
-    this.monthsData.push({ 'value': 6, 'name': this.months[6], 'disabled': this.isMonthDisabled(6) });
-    this.monthsData.push({ 'value': 7, 'name': this.months[7], 'disabled': this.isMonthDisabled(7) });
-    this.monthsData.push({ 'value': 8, 'name': this.months[8], 'disabled': this.isMonthDisabled(8) });
-    this.monthsData.push({ 'value': 9, 'name': this.months[9], 'disabled': this.isMonthDisabled(9) });
-    this.monthsData.push({ 'value': 10, 'name': this.months[10], 'disabled': this.isMonthDisabled(10) });
-    this.monthsData.push({ 'value': 11, 'name': this.months[11], 'disabled': this.isMonthDisabled(11) });
+    this.monthsData.push({ value: 0, name: this.months[0], disabled: this.isMonthDisabled(0) });
+    this.monthsData.push({ value: 1, name: this.months[1], disabled: this.isMonthDisabled(1) });
+    this.monthsData.push({ value: 2, name: this.months[2], disabled: this.isMonthDisabled(2) });
+    this.monthsData.push({ value: 3, name: this.months[3], disabled: this.isMonthDisabled(3) });
+    this.monthsData.push({ value: 4, name: this.months[4], disabled: this.isMonthDisabled(4) });
+    this.monthsData.push({ value: 5, name: this.months[5], disabled: this.isMonthDisabled(5) });
+    this.monthsData.push({ value: 6, name: this.months[6], disabled: this.isMonthDisabled(6) });
+    this.monthsData.push({ value: 7, name: this.months[7], disabled: this.isMonthDisabled(7) });
+    this.monthsData.push({ value: 8, name: this.months[8], disabled: this.isMonthDisabled(8) });
+    this.monthsData.push({ value: 9, name: this.months[9], disabled: this.isMonthDisabled(9) });
+    this.monthsData.push({ value: 10, name: this.months[10], disabled: this.isMonthDisabled(10) });
+    this.monthsData.push({ value: 11, name: this.months[11], disabled: this.isMonthDisabled(11) });
   }
 
   isMonthDisabled(month) {
@@ -188,7 +195,7 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
           const date = new Date(this.firstDay.getTime());
           date.setDate(date.getDate() + (count - 1));
           // tslint:disable-next-line:max-line-length
-          this.dateArray[i].push({ 'dateNumber': date.getDate(), 'date': date, 'disabled': ((this.minDate && this.compareMinDate(date)) || (this.maxDate && this.compareMaxDate(date)) || this.isDateDisabled(date)), 'selected': this.getSelected(date), 'description': this.getDescription(date), 'rangeSelectedMid': this.getRangeSelectedMid(date), 'rangeSelectedStart': this.getRangeSelectedStart(date), 'rangeSelectedEnd': this.getRangeSelectedEnd(date), 'onlyFromDate': this.onlyFromDate() });
+          this.dateArray[i].push({ dateNumber: date.getDate(), date, disabled: ((this.minDate && this.compareMinDate(date)) || (this.maxDate && this.compareMaxDate(date)) || this.isDateDisabled(date)), selected: this.getSelected(date), description: this.getDescription(date), rangeSelectedMid: this.getRangeSelectedMid(date), rangeSelectedStart: this.getRangeSelectedStart(date), rangeSelectedEnd: this.getRangeSelectedEnd(date), onlyFromDate: this.onlyFromDate() });
 
           if (count === this.lastDay.getDate()) {
             break;
@@ -254,10 +261,10 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
     }
   }
 
-  onlyFromDate(){
-    if(this.fromDate && !this.toDate) {
+  onlyFromDate() {
+    if (this.fromDate && !this.toDate) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }
@@ -310,6 +317,22 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
           dateData.date.getDate() === date.getDate());
       });
       return data ? true : false;
+    } else {
+      return false;
+    }
+  }
+
+  getDisabledDescription(date) {
+    if (this.disableWeekends && (date.getDay() === 6 || date.getDay() === 0)) {
+      return true;
+    }
+    if (this.disabledDates) {
+      const data = this.disabledDates.find(dateData => {
+        return (dateData.date.getFullYear() === date.getFullYear() &&
+          dateData.date.getMonth() === date.getMonth() &&
+          dateData.date.getDate() === date.getDate());
+      });
+      return data ? data.description : '';
     } else {
       return false;
     }
@@ -427,24 +450,28 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
 
   setSelection(day) {
     if (this.dateRange) {
-      if (!this.fromDate) {
-        this.fromDate = day.date;
-      } else if (this.fromDate && !this.toDate) {
-        // tslint:disable-next-line:max-line-length
-        if (this.fromDate.getMonth() === day.date.getMonth() && this.fromDate.getFullYear() === day.date.getFullYear() && this.fromDate.getDate() === day.date.getDate() ) {
-          this.toDate = day.date;
-          this.paint();
-          return true;
-        } else if (day.date < this.fromDate) {
-          const dateData = new Date(day.date);
-          this.fromDate = dateData;
-        } else {
-          this.toDate = day.date;
+      if (this.isFromDateConstant) {
+        this.toDate = day.date;
+      } else {
+        if (!this.fromDate) {
+          this.fromDate = day.date;
+        } else if (this.fromDate && !this.toDate) {
+          // tslint:disable-next-line:max-line-length
+          if (this.fromDate.getMonth() === day.date.getMonth() && this.fromDate.getFullYear() === day.date.getFullYear() && this.fromDate.getDate() === day.date.getDate()) {
+            this.toDate = day.date;
+            this.paint();
+            return true;
+          } else if (day.date < this.fromDate) {
+            const dateData = new Date(day.date);
+            this.fromDate = dateData;
+          } else {
+            this.toDate = day.date;
+          }
+        } else if (this.fromDate && this.toDate) {
+          this.fromDate = null;
+          this.toDate = null;
+          this.setSelection(day);
         }
-      } else if (this.fromDate && this.toDate) {
-        this.fromDate = null;
-        this.toDate = null;
-        this.setSelection(day);
       }
     } else {
       this.selectedDate = day.date;
@@ -455,7 +482,7 @@ export class BpDatePickerComponent implements OnInit, OnDestroy {
 
   emitSelectedDate() {
     if (this.dateRange) {
-      let data = [];
+      const data = [];
       data.push(this.fromDate);
       data.push(this.toDate);
       this.datePickerService.setDateEmitter(data);

@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { BpDatePickerComponent } from './bp-datepicker.component';
 import { DatePickerService } from './datepicker.service';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, formatDate } from '@angular/common';
 
 @Directive({
    selector: `[bpDatePicker]`,
@@ -32,6 +32,9 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
    @Output() closedEmitter = new EventEmitter();
    @Input() selectedDate;
    @Input() dateRange;
+   @Input() fromDate;
+   @Input() toDate;
+   @Input() isFromDateConstant;
    clickEventListener: any;
    component: any;
    domele: any;
@@ -44,21 +47,18 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
       private elementRef: ElementRef,
       private datePickerService: DatePickerService,
       @Inject(DOCUMENT) private document: any) {
-         // console.log('datepicker directive changes');
       }
 
    ngAfterViewInit() {
       this.datePickerService.getdateEmitter().subscribe(value => {
-         console.log(value);
          this.dateEmitter.emit(value);
       });
       this.getData();
-      // this.appendComponentToBody(BpDatePickerComponent);
    }
 
    @HostListener('window:resize', [])
    onWindowResize() {
-      if(this.componentRef) {
+      if (this.componentRef) {
          this.setElemPosition();
       }
    }
@@ -81,7 +81,10 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
          disabledDates: this.disabledDates,
          disableWeekends: this.disableWeekends,
          selectedDate: this.selectedDate,
-         dateRange: this.dateRange
+         dateRange: this.dateRange,
+         fromDate: this.fromDate,
+         toDate: this.toDate,
+         isFromDateConstant: this.isFromDateConstant
       };
       this.datePickerService.setProperties(data);
       if (this.closed) {
@@ -154,13 +157,11 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
 
 
    scroll = (): void => {
-      console.log('here i am ');
       this.setElemPosition();
    }
 
    setElemPosition() {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      console.log(rect);
       this.domele.style.position = 'absolute';
       this.domele.style.top = (rect.height + rect.top) + window.scrollY + 'px';
       this.domele.style.left = rect.left + 'px';

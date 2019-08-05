@@ -68,7 +68,12 @@
             [class.rangeSelectedEnd]="weekDay.rangeSelectedEnd"
             [class.onlyFirstDate]="weekDay.onlyFromDate"
             (click)="!weekDay.disabled && setSelection(weekDay)">
-            <span class="dateData">{{ weekDay.dateNumber }}</span>
+            <span class="dateData">
+              {{ weekDay.dateNumber }}
+              <span class="description" *ngIf="weekDay.description">
+                &nbsp;
+              </span>
+            </span>
           </span>
         </div>
       </div>

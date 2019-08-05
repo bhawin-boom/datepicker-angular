@@ -12,16 +12,22 @@ export class AppComponent implements OnInit {
   maxDate: any;
   disabledDates: any;
   isClosed = true;
+  disabledDate = new Date();
+  fromDate: Date;
 
   constructor() {
 
   }
 
   ngOnInit() {
+    this.disabledDate.setDate(this.disabledDate.getDate() + 1);
+    // this.disabledDates = [];
+    // this.disabledDates.push({date: this.disabledDate , description: 'Today is holiday'});
     this.minDate = new Date();
     this.minDate = new Date(this.minDate.setMonth(this.minDate.getMonth() - 3));
     this.maxDate = new Date();
     this.maxDate = new Date(this.maxDate.setMonth(this.maxDate.getMonth() + 3));
+    this.fromDate = this.disabledDate;
   }
 
   toggleClosed() {

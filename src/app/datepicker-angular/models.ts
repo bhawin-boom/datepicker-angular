@@ -5,4 +5,7 @@ export interface IDatePickerProperties {
     selectedDate?: Date;
     disableWeekends?: boolean;
     dateRange?: boolean;
+    fromDate?: Date;
+    toDate?: Date;
+    isFromDateConstant?: boolean;
 }

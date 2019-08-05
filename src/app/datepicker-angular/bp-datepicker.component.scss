@@ -99,6 +99,14 @@
          
              span.bp-disabled-date {
                color: #666666;
+               .dateData{
+                .description{
+                  border-bottom: solid 3px black;
+                  height: 0px;
+                  width: 100%;
+                  cursor: pointer;
+                }
+               }
              }
          
              span {
@@ -204,15 +212,6 @@
   }
 }
 
-.description {
-  background: #006341;
-  height: 4px;
-  width: 100%;
-  display: block;
-  text-align: center;
-  cursor: pointer;
-}
-
 :host-context(.dark-theme) {
   .bp-datepicker-wrapper {
     background: #2d2d30;
@@ -291,12 +290,3 @@
     }
   }
 }
-
-// .description{
-//    background: #006341;
-//    height: 4px;
-//    width: 100%;
-//    display: block;
-//    text-align: center;
-//    cursor: pointer;
-// }
