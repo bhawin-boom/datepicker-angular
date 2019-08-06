@@ -166,7 +166,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
       this.domele.style.top = (rect.height + rect.top) + window.scrollY + 'px';
       this.domele.style.left = rect.left + 'px';
       this.domele.style.width = Math.floor(rect.width) + 'px';
-      this.domele.style.zIndex = '9999999999';
+      this.domele.style.zIndex = '2147483646';
    }
 
    close() {

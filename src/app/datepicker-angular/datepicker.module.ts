@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DatePickerDirective } from './datepicker.directive';
 import { DatePickerService } from './datepicker.service';
 import { BpDatePickerComponent } from './bp-datepicker.component';
+import {TooltipDirective} from './tooltip.directive';
 
 @NgModule({
     declarations: [
         BpDatePickerComponent,
-        DatePickerDirective
+        DatePickerDirective,
+        TooltipDirective
     ],
     exports: [
         DatePickerDirective

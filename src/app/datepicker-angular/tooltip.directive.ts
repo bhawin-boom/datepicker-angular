@@ -9,7 +9,7 @@ import {
 
 export class TooltipDirective implements AfterViewInit, OnDestroy {
 
-   @Input() tooltipHideTimeout: any = 2400;
+   @Input() tooltipHideTimeout: any = 2400; 
    mouseEnterListener: Function;
    mouseLeaveListener: Function;
    container: any;
@@ -42,11 +42,11 @@ export class TooltipDirective implements AfterViewInit, OnDestroy {
       if (this.el.nativeElement && this.el.nativeElement.id === 'columnWithScroll') {
          leftScrollPostion = this.el.nativeElement.parentElement.parentElement.parentElement.parentElement.scrollLeft;
       }
-      let oTop = this.el.nativeElement.offsetTop;
-      let oLeft = this.el.nativeElement.offsetLeft - leftScrollPostion;
+      const oTop = this.el.nativeElement.offsetTop;
+      const oLeft = this.el.nativeElement.offsetLeft - leftScrollPostion;
       this.container = this.renderer.createElement('div');
-      this.container.style.top = (oTop + 30) + 'px';
-      this.container.style.left = (oLeft + 30) + 'px';
+      this.container.style.top = (oTop - 30) + 'px';
+      this.container.style.left = (oLeft - 30) + 'px';
       this.container.id = 'tooltipDiv';
       const innerTextDiv = this.renderer.createElement('div');
       this.renderer.addClass(innerTextDiv, 'innerText');

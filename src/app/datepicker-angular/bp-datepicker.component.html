@@ -70,7 +70,7 @@
             (click)="!weekDay.disabled && setSelection(weekDay)">
             <span class="dateData">
               {{ weekDay.dateNumber }}
-              <span class="description" *ngIf="weekDay.description">
+              <span class="description" *ngIf="weekDay.description" [appTooltip]="weekDay.description">
                 &nbsp;
               </span>
             </span>

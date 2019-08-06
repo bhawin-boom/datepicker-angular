@@ -20,14 +20,21 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.disabledDate.setDate(this.disabledDate.getDate() + 1);
-    // this.disabledDates = [];
-    // this.disabledDates.push({date: this.disabledDate , description: 'Today is holiday'});
+    this.disabledDates = [];
+    this.setDisableDates();
     this.minDate = new Date();
     this.minDate = new Date(this.minDate.setMonth(this.minDate.getMonth() - 3));
     this.maxDate = new Date();
     this.maxDate = new Date(this.maxDate.setMonth(this.maxDate.getMonth() + 3));
-    this.fromDate = this.disabledDate;
+  }
+
+  setDisableDates() {
+    for (let i = 1 ; i < 30; ++i) {
+      const date = new Date(this.disabledDate);
+      date.setDate(date.getDate() + i*2);
+      console.log(date);
+      this.disabledDates.push({"date": date , "description": 'Today is holiday'});
+    }
   }
 
   toggleClosed() {

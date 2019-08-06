@@ -68,94 +68,123 @@
 }
 
 .bp-datepicker-body {
-   .dateView{
-      margin-top: 15px;
-      text-align: center;
-      font-size: 14px;
-      div.bp-heading {
-         color: #bbbbbb;
-         width: 100%;
-         display: flex;
-         div {
-            align-content: space-around;
-            width: calc(100%/7);
-         }
-         clear: both;
-       }
+  .dateView {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
 
-       .rows {
-          width: 100%;
-          display: flex;
-          margin-bottom: 5px;
-          div {
-            text-align: center;
-            width: calc(100%/7);
-            align-content: space-around;
-            float: left;
-            span.bp-enabled-date {
-               color: #bbbbbb;
-               cursor: pointer;
-             }
-         
-             span.bp-disabled-date {
-               color: #666666;
-               .dateData{
-                .description{
-                  border-bottom: solid 3px black;
-                  height: 0px;
-                  width: 100%;
-                  cursor: pointer;
+    div.bp-heading {
+      color: #bbbbbb;
+      width: 100%;
+      display: flex;
+
+      div {
+        align-content: space-around;
+        width: calc(100%/7);
+      }
+
+      clear: both;
+    }
+
+    .rows {
+      width: 100%;
+      display: flex;
+      margin-bottom: 5px;
+
+      div {
+        text-align: center;
+        width: calc(100%/7);
+        align-content: space-around;
+        float: left;
+
+        span.bp-enabled-date {
+          color: #bbbbbb;
+          cursor: pointer;
+        }
+
+        span.bp-disabled-date {
+          color: #666666;
+
+          .dateData {
+            .description {
+              border-bottom: solid 5px black;
+              height: 0px;
+              width: 100%;
+              cursor: pointer;
+
+              #tooltipDiv {
+                text-align: left !important;
+                float: none;
+                width: auto;
+                line-height: initial;
+                position: absolute;
+                border: solid 1px #006341;
+                border-radius: 5px;
+                background: white;
+
+                .innerText {
+                  text-align: left;
+                  float: none;
+                  width: auto;
+                  align-content: center;
+                  line-height: normal;
+                  padding: 5px;
                 }
-               }
-             }
-         
-             span {
-               display: block;
-               line-height: 57px;
-               :last-of-type{
-                  &.rangeSelectedMid{
-                     border-top-right-radius: 50%;
-                     border-bottom-right-radius: 50%;
-                  }
-               }
-               :first-of-type{
-                  &.rangeSelectedMid{
-                     border-top-left-radius: 50%;
-                     border-bottom-left-radius: 50%;
-                  }
-               }
-             }
-         
-             span.selected {
-               background: #78be20;
-               color: white;
-               border-radius: 50%;
-             }
-         
-             span.rangeSelectedMid {
-               background: #78be20;
-               color: #006341;
-             }
-         
-             span.rangeSelectedStart {
-               background: #78be20;
-               color: white;
-               border-top-left-radius: 50%;
-               border-bottom-left-radius: 50%;
-               &.onlyFirstDate{
-                  border-radius: 50%;
-               }
-             }
-         
-             span.rangeSelectedEnd {
-               background: #78be20;
-               color: white;
-               border-top-right-radius: 50%;
-               border-bottom-right-radius: 50%;
+              }
             }
           }
-       }
-   }
+        }
+
+        span {
+          display: block;
+          line-height: 57px;
+
+          :last-of-type {
+            &.rangeSelectedMid {
+              border-top-right-radius: 50%;
+              border-bottom-right-radius: 50%;
+            }
+          }
+
+          :first-of-type {
+            &.rangeSelectedMid {
+              border-top-left-radius: 50%;
+              border-bottom-left-radius: 50%;
+            }
+          }
+        }
+
+        span.selected {
+          background: #78be20;
+          color: white;
+          border-radius: 50%;
+        }
+
+        span.rangeSelectedMid {
+          background: #78be20;
+          color: #006341;
+        }
+
+        span.rangeSelectedStart {
+          background: #78be20;
+          color: white;
+          border-top-left-radius: 50%;
+          border-bottom-left-radius: 50%;
+
+          &.onlyFirstDate {
+            border-radius: 50%;
+          }
+        }
+
+        span.rangeSelectedEnd {
+          background: #78be20;
+          color: white;
+          border-top-right-radius: 50%;
+          border-bottom-right-radius: 50%;
+        }
+      }
+    }
+  }
 
   .monthView {
     display: flex;
@@ -212,81 +241,82 @@
   }
 }
 
-:host-context(.dark-theme) {
-  .bp-datepicker-wrapper {
-    background: #2d2d30;
-    border-color: #7e5475;
+// :host-context(.dark-theme) {
+//   .bp-datepicker-wrapper {
+//     background: #2d2d30;
+//     border-color: #7e5475;
 
-    .bp-datepicker-header {
-      span.headerButton {
-        color: #d1d1d1;
+//     .bp-datepicker-header {
+//       span.headerButton {
+//         color: #d1d1d1;
 
-        &:hover {
-          background: #000000;
-        }
-      }
-    }
+//         &:hover {
+//           background: #000000;
+//         }
+//       }
+//     }
 
-    .bp-datepicker-body {
-      div.dateView {
-        display: block;
-        div.bp-heading {
-          color: #bbbbbb;
-        }
+//     .bp-datepicker-body {
+//       div.dateView {
+//         display: block;
 
-        td>span.bp-enabled-date {
-          color: #d1d1d1;
+//         div.bp-heading {
+//           color: #bbbbbb;
+//         }
 
-          &:hover {
-            background: #000000;
-          }
-        }
+//         td>span.bp-enabled-date {
+//           color: #d1d1d1;
 
-        td>span.bp-disabled-date {
-          color: #666666;
-        }
+//           &:hover {
+//             background: #000000;
+//           }
+//         }
 
-        td>span.selected {
-          background: #7e5475;
-          color: white;
+//         td>span.bp-disabled-date {
+//           color: #666666;
+//         }
 
-          &:hover {
-            background: #000000 !important;
-          }
-        }
-      }
+//         td>span.selected {
+//           background: #7e5475;
+//           color: white;
 
-      .monthView {
-        .month {
-          div.bp-disabled-month {
-            color: #bbbbbb;
-          }
+//           &:hover {
+//             background: #000000 !important;
+//           }
+//         }
+//       }
 
-          div.bp-enabled-month {
-            color: #666666;
+//       .monthView {
+//         .month {
+//           div.bp-disabled-month {
+//             color: #bbbbbb;
+//           }
 
-            &:hover {
-              background: #000000;
-            }
-          }
-        }
-      }
+//           div.bp-enabled-month {
+//             color: #666666;
 
-      .yearView {
-        .year {
-          div.bp-disabled-year {
-            color: #bbbbbb;
-          }
+//             &:hover {
+//               background: #000000;
+//             }
+//           }
+//         }
+//       }
 
-          div.bp-enabled-year {
-            color: #666666;
+//       .yearView {
+//         .year {
+//           div.bp-disabled-year {
+//             color: #bbbbbb;
+//           }
 
-            &:hover {
-              background: #000000;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+//           div.bp-enabled-year {
+//             color: #666666;
+
+//             &:hover {
+//               background: #000000;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
