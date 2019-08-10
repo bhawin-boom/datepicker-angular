@@ -30,6 +30,14 @@ The disable particular dates feature disables the selection of of the dates give
 The close datepicker feature is used to hide and show the datepicker .
 `<input type="text" bpDatePicker [closed]="true/false" />` 
 
+    DateRange
+You can now make this date picker as a daterange picker
+`<input type="text" bpDatePicker [DateRange]="true" />`
+Just keep it true when you want it , else just remove the `DateRange` tag
+you can also set the from and to dates in DateRange 
+`<input type="text" bpDatePicker [DateRange]="true" [fromDate]="javascript Date Object" [toDate]="javascript date Object"  />`
+You can also keep the from Date Constant and allow user to only select toDate
+`<input type="text" bpDatePicker [DateRange]="true" [fromDate]="javascript Date Object" [isFromDateConstant]="true"  />`
 
 ## Build
 
