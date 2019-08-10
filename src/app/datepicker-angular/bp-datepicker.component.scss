@@ -107,10 +107,17 @@
 
           .dateData {
             .description {
-              border-bottom: solid 5px black;
               height: 0px;
               width: 100%;
-              cursor: pointer;
+              margin-top: -17px;
+              .circle{
+                height: 8px;
+                width: 8px;
+                background-color: #78be20;
+                border-radius: 50%;
+                margin-left: calc(50% - 4px);
+                cursor: pointer;
+              }
 
               #tooltipDiv {
                 text-align: left !important;
@@ -118,7 +125,7 @@
                 width: auto;
                 line-height: initial;
                 position: absolute;
-                border: solid 1px #006341;
+                border: solid 2px #006341;
                 border-radius: 5px;
                 background: white;
 

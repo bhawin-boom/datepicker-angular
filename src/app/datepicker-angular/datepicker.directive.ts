@@ -116,6 +116,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
 
       this.domele = domElem;
       document.body.appendChild(this.domele);
+      this.domele.style.display = 'none';
       setTimeout(() => {
          this.setElemPosition();
          const eventListerer = this.document.addEventListener('click' , (event) => {
@@ -167,6 +168,7 @@ export class DatePickerDirective implements AfterViewInit, OnChanges {
       this.domele.style.left = rect.left + 'px';
       this.domele.style.width = Math.floor(rect.width) + 'px';
       this.domele.style.zIndex = '2147483646';
+      this.domele.style.display = 'block';
    }
 
    close() {
